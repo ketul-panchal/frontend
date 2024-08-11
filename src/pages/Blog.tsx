@@ -11,7 +11,7 @@ export const Blog = () => {
     id: id || "",
   });
 
-  if (loading)
+  if (loading || !post)
     return (
       <div>
         <Appbar />
