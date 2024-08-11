@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useBlog } from "../hooks";
 import { FullBlog } from "../components/FullBlog";
-import { BlogSkeleton } from "../components/BlogSkeleton";
 import { Spinner } from "../components/Spinner";
 import { Appbar } from "../components/Appbar";
 
