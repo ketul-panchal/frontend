@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-interface BlogCardPage {
+interface BlogCardProps {
   id: number;
   authorName: string;
   title: string;
@@ -14,36 +14,37 @@ export const BlogCard = ({
   title,
   content,
   published,
-}: BlogCardPage) => {
+}: BlogCardProps) => {
   return (
     <Link to={`/blog/${id}`}>
-      <div className="border-b border-slate-200 p-4 pb-4 w-screen max-w-screen-md cursor-pointer">
-        <div className="flex">
-          <Avatar size={"small"} name={authorName} />
-          <div className="font-extralight pl-2 text-sm flex justify-center flex-col">
-            {authorName}
-          </div>
-          <div className="flex justify-center flex-col pl-2 ">
+      <div className="border-b border-slate-200 p-6 md:p-8 w-full max-w-screen-md cursor-pointer hover:bg-gradient-to-r from-slate-50 to-white transition-all duration-300 shadow-sm hover:shadow-md rounded-lg mb-6">
+        <div className="flex items-center space-x-4 mb-4">
+          <Avatar size="small" name={authorName} />
+          <div className="flex items-center space-x-2">
+            <span className="font-semibold text-sm text-slate-800">{authorName}</span>
             <Circle />
-          </div>
-          <div className="pl-2 font-thin text-slate-500 text-sm flex justify-center flex-col">
-            {published}
+            <span className="text-sm text-slate-500">{published}</span>
           </div>
         </div>
-        <div className="text-xl  font-semibold pt-2">{title}</div>
-        <div className="text-md font-thin pt-4">
+        <h2 className="text-2xl md:text-3xl font-bold mb-3 text-slate-900 leading-tight">{title}</h2>
+        <p className="text-lg text-slate-600 mb-4 leading-relaxed">
           {content.slice(0, 100) + "..."}
+        </p>
+        <div className="flex items-center justify-between">
+          <div className="text-sm text-slate-500 font-medium bg-slate-100 px-3 py-1 rounded-full">
+            {`${Math.ceil(content.length / 100)} minute${Math.ceil(content.length / 100) !== 1 ? 's' : ''} read`}
+          </div>
+          <div className="text-sm text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-200">
+            Read more →
+          </div>
         </div>
-        <div className="w-full text-slate-400 text-sm font-thin">{`${Math.ceil(
-          content.length / 100
-        )} minute(s) read`}</div>
       </div>
     </Link>
   );
 };
 
 export function Circle() {
-  return <div className="h-1 w-1 rounded-full bg-slate-500"></div>;
+  return <div className="h-1 w-1 rounded-full bg-slate-300"></div>;
 }
 
 export function Avatar({
@@ -56,16 +57,16 @@ export function Avatar({
   return (
     <div
       className={`relative inline-flex items-center justify-center overflow-hidden
-     bg-gray-100 rounded-full dark:bg-gray-600 ${
-       size === "small" ? "w-6 h-6" : "w-10 h-10"
+     bg-gradient-to-br from-blue-500 to-purple-600 rounded-full text-white shadow-lg ${
+       size === "small" ? "w-10 h-10" : "w-14 h-14"
      }`}
     >
       <span
         className={`${
-          size === "small" ? "text-xs" : "text-md"
-        } text-gray-600 dark:text-gray-300`}
+          size === "small" ? "text-sm" : "text-lg"
+        } font-bold`}
       >
-        {name[0]}
+        {name[0].toUpperCase()}
       </span>
     </div>
   );
